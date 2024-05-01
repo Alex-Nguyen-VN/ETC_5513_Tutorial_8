@@ -12,7 +12,6 @@ library(tidyverse)
 data_tutorial <- read.csv("Data_Tables_Criminal_Incidents_Visualisation_Year_Ending_December_2019.csv")
 ```
 
-
 ```{r}
 data_tutorial[,'Incidents.Recorded'] <- gsub(",","",data_tutorial[,'Incidents.Recorded'])
 data_tutorial$Incidents.Recorded <- as.numeric(data_tutorial$Incidents.Recorded)
@@ -29,5 +28,20 @@ data_tutorial |>
 ```
 
 The incident rate that have been recorded for A11 Murder subgroup have been increasing through out the decade.
+
+```{r}
+data_tutorial$Incidents.Recorded <- str_remove(data_tutorial$Incidents.Recorded, ",")
+data_tutorial %>% 
+  group_by(Offence.Division) %>%
+  summarise(Total = sum(as.numeric(Incidents.Recorded)), .groups = "drop") %>%
+  arrange(desc(Total)) %>%
+  ggplot(aes(x = Offence.Division, y = Total)) +
+  geom_col() +
+  coord_flip() +
+  labs(title = "Total number of incidents for each Offence subdivision",
+       x = "Offence subdivision",
+       y = "Total number of incidents")
+```
+
 
 
