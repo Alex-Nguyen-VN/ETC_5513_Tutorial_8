@@ -44,4 +44,18 @@ data_tutorial %>%
 ```
 
 
+```{r}
+data_tutorial$Incidents.Recorded <- str_remove(data_tutorial$Incidents.Recorded, pattern = ",")  
+  mutate(Incidents.Recorded = as.numeric(Incidents.Recorded)) 
+
+data_tutorial %>%
+  mutate(Incidents.Recorded = as.numeric(Incidents.Recorded)) %>%
+  filter(Offence.Division == "A Crimes against the person") %>% 
+  ggplot(aes(x = as.factor(Offence.Subdivision), 
+         y = Incidents.Recorded)) + 
+  geom_col(width = 0.5) + 
+  theme(axis.title.x = element_text(size = 10))
+```
+
+
 
