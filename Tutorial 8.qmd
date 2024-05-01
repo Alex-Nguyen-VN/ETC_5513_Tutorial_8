@@ -11,3 +11,15 @@ library(tidyverse)
 ```{r Load the data}
 data_tutorial <- read.csv("Data_Tables_Criminal_Incidents_Visualisation_Year_Ending_December_2019.csv")
 ```
+
+```{r}
+#| label: fig-A11
+#| fig-cap: "Incidents record rate in the A11 Murder subgroup"
+#| echo: false
+data_tutorial |> 
+  filter(Offence.Subgroup == "A11 Murder") |> 
+  ggplot(aes(x = Incidents.Recorded, y = Year) +
+  geom_point()
+```
+
+The incident rate that have been recorded for A11 Murder subgroup have been increasing through out the decade.
