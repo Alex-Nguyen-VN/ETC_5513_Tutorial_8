@@ -16,6 +16,7 @@ data_tutorial <- read.csv("Data_Tables_Criminal_Incidents_Visualisation_Year_End
 ```{r}
 data_tutorial[,'Incidents.Recorded'] <- gsub(",","",data_tutorial[,'Incidents.Recorded'])
 data_tutorial$Incidents.Recorded <- as.numeric(data_tutorial$Incidents.Recorded)
+data_tutorial$Year <- as.Date(as.character(data_tutorial$Year), format="%Y")
 ```
 
 ```{r}
